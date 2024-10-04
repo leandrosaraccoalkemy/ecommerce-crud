@@ -21,7 +21,7 @@ public class ProductRepository {
         loadProducts();
     }
 
-    private void loadProducts() {
+    public void loadProducts() {
         try {
             ObjectMapper mapper = new ObjectMapper();
             Product[] loadedProducts = mapper.readValue(new File("src/main/resources/products.json"), Product[].class);
@@ -54,5 +54,10 @@ public class ProductRepository {
 
     public Product findById(String id) {
         return products.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    public void deleteAll() {
+        products.clear(); // Limpia la lista de productos
+        nextId = 1; // Reinicia el siguiente ID a 1
     }
 }
