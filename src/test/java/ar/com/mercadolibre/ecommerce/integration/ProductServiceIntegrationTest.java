@@ -48,7 +48,7 @@ public class ProductServiceIntegrationTest {
 
     @Test
     public void testFindById() throws Exception {
-        Product newProduct = new Product(null, "Product 2", "Description 2", 20.0);
+        Product newProduct = new Product(null, "Product 2", 20.0);
         Product savedProduct = productRepository.save(newProduct);
 
         mockMvc.perform(get("/products/" + savedProduct.getId()))
@@ -58,14 +58,14 @@ public class ProductServiceIntegrationTest {
 
     @Test
     public void testFindAll() throws Exception {
-        Product product1 = new Product(null, "Product 3", "Description 3", 30.0);
-        Product product2 = new Product(null, "Product 4", "Description 4", 40.0);
+        Product product1 = new Product(null, "Product 3", 30.0);
+        Product product2 = new Product(null, "Product 4", 40.0);
         productRepository.save(product1);
         productRepository.save(product2);
 
         mockMvc.perform(get("/products"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(12)));
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 
     @Test

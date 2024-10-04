@@ -32,8 +32,8 @@ public class ProductServiceTest {
 
     @Test
     public void testFindAll() {
-        Product product1 = new Product("1", "Product 1", "Description 1", 10.0);
-        Product product2 = new Product("2", "Product 2", "Description 2", 20.0);
+        Product product1 = new Product("1", "Product 1", 10.0);
+        Product product2 = new Product("2", "Product 2", 20.0);
         List<Product> mockProducts = Arrays.asList(product1, product2);
 
         when(productRepository.findAll()).thenReturn(mockProducts);
@@ -45,8 +45,8 @@ public class ProductServiceTest {
 
     @Test
     public void testSaveNewProduct() {
-        Product newProduct = new Product(null, "Product 3", "Description 3", 30.0);
-        when(productRepository.save(newProduct)).thenReturn(new Product("3", "Product 3", "Description 3", 30.0));
+        Product newProduct = new Product(null, "Product 3", 30.0);
+        when(productRepository.save(newProduct)).thenReturn(new Product("3", "Product 3", 30.0));
 
         Product savedProduct = productService.createProduct(newProduct);
         assertNotNull(savedProduct);
@@ -55,7 +55,7 @@ public class ProductServiceTest {
 
     @Test
     public void testFindById() {
-        Product product = new Product("1", "Product 1", "Description 1", 10.0);
+        Product product = new Product("1", "Product 1", 10.0);
         when(productRepository.findById("1")).thenReturn(product);
 
         Product foundProduct = productService.getProductById("1");
